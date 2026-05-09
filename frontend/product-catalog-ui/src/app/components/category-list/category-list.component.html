@@ -1,0 +1,100 @@
+<div class="max-w-5xl mx-auto px-4 py-6">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">Categories</h1>
+    <button
+      (click)="showForm = !showForm"
+      class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition-colors text-sm font-medium">
+      {{ showForm ? 'Cancel' : '+ New Category' }}
+    </button>
+  </div>
+
+  @if (errorMessage) {
+    <div class="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded mb-4 text-sm">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (showForm) {
+    <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6 mb-6">
+      <h2 class="font-semibold text-gray-800 mb-4">New Category</h2>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Name <span class="text-red-500">*</span></label>
+          <input
+            formControlName="name"
+            type="text"
+            class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+          @if (fieldError('name')) {
+            <p class="text-red-600 text-xs mt-1">{{ fieldError('name') }}</p>
+          }
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <input
+            formControlName="description"
+            type="text"
+            class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Parent Category</label>
+          <select
+            formControlName="parentCategoryId"
+            class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            <option value="">— None (top-level) —</option>
+            @for (cat of categories; track cat.id) {
+              <option [value]="cat.id">{{ cat.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="flex gap-3 pt-1">
+          <button
+            type="submit"
+            [disabled]="submitting"
+            class="bg-indigo-600 text-white px-5 py-2 rounded text-sm hover:bg-indigo-700 disabled:opacity-50 transition-colors">
+            Create Category
+          </button>
+          <button
+            type="button"
+            (click)="showForm = false"
+            class="border border-gray-300 text-gray-700 px-5 py-2 rounded text-sm hover:bg-gray-50 transition-colors">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  }
+
+  @if (loading) {
+    <div class="text-center py-12 text-gray-500 text-sm">Loading…</div>
+  } @else if (categories.length === 0) {
+    <div class="text-center py-12 text-gray-400 text-sm">No categories yet.</div>
+  } @else {
+    <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+      <table class="min-w-full divide-y divide-gray-200 text-sm">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-4 py-3 text-left font-medium text-gray-600">Name</th>
+            <th class="px-4 py-3 text-left font-medium text-gray-600">Description</th>
+            <th class="px-4 py-3 text-left font-medium text-gray-600">Parent</th>
+            <th class="px-4 py-3 text-left font-medium text-gray-600">Created</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-100">
+          @for (cat of categories; track cat.id) {
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 font-medium text-gray-900">{{ cat.name }}</td>
+              <td class="px-4 py-3 text-gray-600">{{ cat.description || '—' }}</td>
+              <td class="px-4 py-3 text-gray-600">{{ parentName(cat.parentCategoryId) }}</td>
+              <td class="px-4 py-3 text-gray-500">{{ cat.createdAt | date:'mediumDate' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
