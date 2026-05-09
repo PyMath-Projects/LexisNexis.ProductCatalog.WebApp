@@ -12,7 +12,7 @@ public sealed class ProductRepository(ProductCatalogDbContext context)
         CancellationToken ct = default)
     {
         var query = Context.Products
-            .Where(p => EF.Property<string>(p, "Sku") == skuValue);
+            .Where(p => p.Sku.Value == skuValue);
 
         if (excludeProductId.HasValue)
             query = query.Where(p => p.Id != excludeProductId.Value);
