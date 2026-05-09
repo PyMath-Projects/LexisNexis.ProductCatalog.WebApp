@@ -42,6 +42,7 @@ and package references required by the project brief.
 - [x] CI workflow added
 - [x] Branch pushed
 - [x] Pull request opened
+- [x] PR checks passed
 
 ## Verification
 

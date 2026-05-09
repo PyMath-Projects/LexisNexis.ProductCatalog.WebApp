@@ -45,7 +45,7 @@ After Angular is scaffolded:
 - [x] `.github/workflows/ci.yml` created
 - [x] Main-branch versioned release step added
 - [x] Initial workflow commands pass locally
-- [ ] Initial workflow passes on GitHub PR
+- [x] Initial workflow passes on GitHub PR
 - [ ] First main-branch release is created after merge
 - [ ] Branch protection configured for `main`
 
@@ -54,6 +54,7 @@ After Angular is scaffolded:
 - `dotnet build ProductCatalog.sln --configuration Release --no-restore` - passed with 0 warnings and 0 errors
 - `dotnet test ProductCatalog.sln --configuration Release --no-build --verbosity normal` - passed
 - Release workflow syntax reviewed locally; release step is gated to push events on `refs/heads/main`
+- GitHub PR check `Build and test` passed on PR #12
 
 ## Risks / Blocks
 
