@@ -1,0 +1,54 @@
+# Task: Add CI Workflow And Branching Rules
+
+**Branch:** `feature/github-actions-ci`
+**Ticket:** #11 - Add GitHub Actions CI and branch workflow guidance
+**Base branch:** `main`
+
+## Scope
+
+Add the repository automation and working convention that keeps `main` as the integration
+branch while normal implementation happens on focused `feature/*` and `fix/*` branches.
+
+## Material Changes
+
+- `.github/workflows/ci.yml` - restore, build, and test checks
+- `AGENTS.md` - branch and CI conventions
+- `AI/Decisions.md` - coordination decision for CI-gated integration
+- GitHub repository settings - branch protection for `main` after CI exists
+
+## Initial CI Shape
+
+The first workflow should run on pull requests and pushes to `main`:
+
+- Checkout repository
+- Install .NET 9 SDK
+- `dotnet restore ProductCatalog.sln`
+- `dotnet build ProductCatalog.sln --configuration Release --no-restore`
+- `dotnet test ProductCatalog.sln --configuration Release --no-build --verbosity normal`
+
+## Later CI Extension
+
+After Angular is scaffolded:
+
+- Install Node 18+
+- Run `npm ci` in `frontend/product-catalog-ui`
+- Run `npm run build`
+
+## Progress
+
+- [x] Branching convention recorded in AI decisions
+- [x] Branching convention recorded in AGENTS.md
+- [x] GitHub issue created
+- [ ] `.github/workflows/ci.yml` created
+- [ ] Initial workflow passes
+- [ ] Branch protection configured for `main`
+
+## Risks / Blocks
+
+- CI cannot pass until the solution is scaffolded.
+- Angular build checks must wait until the SPA exists.
+
+## Next Steps
+
+- Create the GitHub issue and link this task file to it.
+- Implement the initial CI workflow immediately after solution scaffolding.
