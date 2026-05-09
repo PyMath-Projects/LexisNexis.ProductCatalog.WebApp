@@ -30,16 +30,20 @@ events, and product repository interface using test-first development.
 
 - [x] Feature branch created
 - [x] Task file created
-- [ ] Failing tests written
-- [ ] Product domain model implemented
-- [ ] Local tests pass
+- [x] Failing tests written
+- [x] Product domain model implemented
+- [x] Local tests pass
 - [ ] Pull request opened
 - [ ] PR checks pass
 - [ ] Merged to `main`
 
 ## Verification
 
-- Pending
+- `dotnet test tests/ProductCatalog.Domain.Tests/ProductCatalog.Domain.Tests.csproj --no-restore` failed before implementation because Product domain classes did not exist.
+- `dotnet test tests/ProductCatalog.Domain.Tests/ProductCatalog.Domain.Tests.csproj --no-restore` - passed after implementation, 22 domain tests.
+- `dotnet build ProductCatalog.sln --no-restore` - passed with 0 warnings and 0 errors.
+- `dotnet test ProductCatalog.sln --no-build --verbosity normal` - passed.
+- Confirmed `backend/ProductCatalog.Domain/ProductCatalog.Domain.csproj` has zero package references.
 
 ## Risks / Blocks
 
