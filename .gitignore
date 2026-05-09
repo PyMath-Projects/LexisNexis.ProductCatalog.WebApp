@@ -1,0 +1,27 @@
+# Build outputs
+bin/
+obj/
+TestResults/
+
+# .NET user files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDEs
+.idea/
+.vs/
+.vscode/
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
