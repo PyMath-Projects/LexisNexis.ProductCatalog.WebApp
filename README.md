@@ -1,5 +1,7 @@
 # Product Catalog
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/PyMath-Projects/LexisNexis.ProductCatalog.WebApp)
+
 A full-stack product catalog management system built as a senior C#/Angular developer assessment, demonstrating Domain-Driven Design, Vertical Slice Architecture, CQRS, Domain Events, and a thin BFF pattern.
 
 ## Stack
@@ -13,7 +15,18 @@ A full-stack product catalog management system built as a senior C#/Angular deve
 | BFF | ASP.NET Core 9 · YARP |
 | Frontend | Angular 17 · TypeScript strict · Tailwind CSS · RxJS |
 
-## Prerequisites
+## Quick Start — GitHub Codespaces (no install required)
+
+1. Click **Open in GitHub Codespaces** above (or the badge at the top of this file)
+2. Wait ~2 minutes for the container to build and `make install` to complete
+3. Run `make dev` in the terminal
+4. When port 4200 is detected, click **Open in Browser**
+
+All three services start inside the Codespace — no local tooling needed.
+
+## Quick Start — Local
+
+### Prerequisites
 
 ```bash
 dotnet --version   # 9.0+
@@ -21,8 +34,6 @@ node --version     # 18+
 npm --version      # 9+
 ng version         # Angular CLI — install: npm i -g @angular/cli
 ```
-
-## Quick Start
 
 ```bash
 # Install all dependencies
