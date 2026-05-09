@@ -46,8 +46,8 @@ After Angular is scaffolded:
 - [x] Main-branch versioned release step added
 - [x] Initial workflow commands pass locally
 - [x] Initial workflow passes on GitHub PR
-- [ ] First main-branch release is created after merge
-- [ ] Branch protection configured for `main`
+- [x] First main-branch release is created after merge
+- [x] Branch protection configured for `main`
 
 ## Verification
 
@@ -55,6 +55,8 @@ After Angular is scaffolded:
 - `dotnet test ProductCatalog.sln --configuration Release --no-build --verbosity normal` - passed
 - Release workflow syntax reviewed locally; release step is gated to push events on `refs/heads/main`
 - GitHub PR check `Build and test` passed on PR #12
+- Main workflow passed after PR #12 merge and created release `v0.1.4`
+- `main` branch protection requires the `Build and test` status check and blocks force pushes/deletions
 
 ## Risks / Blocks
 
@@ -64,6 +66,4 @@ After Angular is scaffolded:
 
 ## Next Steps
 
-- Push this branch and verify the GitHub Actions run.
-- After merge to `main`, verify a tag and GitHub Release are created.
-- Configure branch protection for `main` after the workflow is visible in GitHub.
+- Add Angular install/build checks after `frontend/product-catalog-ui` is scaffolded.
