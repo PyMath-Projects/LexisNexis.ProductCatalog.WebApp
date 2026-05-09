@@ -8,13 +8,25 @@ install:
 	cd frontend/product-catalog-ui && npm ci
 	@echo "✓ Install complete. Run 'make dev' to start."
 
-# ── Run all three services (requires parallel shell support) ─────────
+# ── Run all three services in order (API must be ready before BFF/UI) ────────
 dev:
+	@echo "→ Clearing ports 5000, 5100, 4200..."
+	@fuser -k 5000/tcp 5100/tcp 4200/tcp 2>/dev/null || true
 	@echo "→ Starting all services. Logs will appear below."
 	@echo "   API   → http://localhost:5000"
 	@echo "   BFF   → http://localhost:5100"
 	@echo "   UI    → http://localhost:4200"
-	@$(MAKE) -j3 dev-backend dev-bff dev-ui
+	@dotnet run --project backend/ProductCatalog.Api/ProductCatalog.Api.csproj \
+		--launch-profile Development & \
+	echo "Waiting for API to be ready..." && \
+	until curl -sf http://localhost:5000/health >/dev/null 2>&1; do sleep 1; done && \
+	echo "✓ API ready." && \
+	dotnet run --project frontend/ProductCatalog.Bff/ProductCatalog.Bff.csproj \
+		--launch-profile Development & \
+	echo "Waiting for BFF to be ready..." && \
+	until curl -sf http://localhost:5100/health >/dev/null 2>&1; do sleep 1; done && \
+	echo "✓ BFF ready." && \
+	cd frontend/product-catalog-ui && ng serve --proxy-config proxy.conf.json
 
 dev-backend:
 	dotnet run --project backend/ProductCatalog.Api/ProductCatalog.Api.csproj \

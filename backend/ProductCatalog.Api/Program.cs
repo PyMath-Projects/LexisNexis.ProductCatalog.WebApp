@@ -9,6 +9,9 @@ using ProductCatalog.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ── Health checks ──────────────────────────────────────────────────────────
+builder.Services.AddHealthChecks();
+
 // ── Controllers + JSON ─────────────────────────────────────────────────────
 builder.Services.AddControllers()
     .AddJsonOptions(opts =>
@@ -50,6 +53,7 @@ app.UseExceptionHandler(errorApp =>
     }));
 
 app.UseMiddleware<RequestTimingMiddleware>();
+app.MapHealthChecks("/health");
 app.MapControllers();
 
 await app.InitialiseDatabaseAsync(app.Configuration);

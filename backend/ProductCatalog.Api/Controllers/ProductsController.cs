@@ -23,8 +23,9 @@ public sealed class ProductsController(IMediator mediator) : ControllerBase
     {
         if (!string.IsNullOrWhiteSpace(filter.Search))
         {
-            var results = await mediator.Send(new SearchProductsQuery(filter.Search), ct);
-            return Ok(results);
+            var result = await mediator.Send(new SearchProductsQuery(filter.Search), ct);
+            Response.Headers["X-Cache"] = result.CacheHit ? "HIT" : "MISS";
+            return Ok(result.Products);
         }
 
         var products = await mediator.Send(new GetProductsQuery(filter.CategoryId), ct);
