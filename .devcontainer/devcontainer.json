@@ -1,14 +1,16 @@
 {
   "name": "Product Catalog",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+
+  // .NET 9 image as the base — dotnet is in PATH from the first shell, no feature needed
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-9.0-bookworm",
 
   "features": {
-    "ghcr.io/devcontainers/features/dotnet:2": {
-      "version": "9"
+    // Add Node 20 on top of the .NET image
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
     }
   },
 
-  // Forward all three service ports
   "forwardPorts": [4200, 5100, 5000],
   "portsAttributes": {
     "4200": {
@@ -25,7 +27,6 @@
     }
   },
 
-  // Install dependencies once on container creation
   "postCreateCommand": "npm install -g @angular/cli@17 && make install",
 
   "customizations": {
