@@ -38,6 +38,7 @@ and package references required by the project brief.
 - [x] Package references added
 - [x] Build verified
 - [x] Tests verified
+- [x] CI workflow added
 - [ ] Branch pushed
 
 ## Verification
@@ -54,5 +55,6 @@ and package references required by the project brief.
 ## Next Steps
 
 - Commit the verified scaffold.
+- Add the initial CI workflow.
 - Push the feature branch.
 - Open/update PR workflow once GitHub Actions exists.

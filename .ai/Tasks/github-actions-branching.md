@@ -1,6 +1,6 @@
 # Task: Add CI Workflow And Branching Rules
 
-**Branch:** `feature/github-actions-ci`
+**Branch:** `feature/solution-scaffold`
 **Ticket:** #11 - Add GitHub Actions CI and branch workflow guidance
 **Base branch:** `main`
 
@@ -39,15 +39,22 @@ After Angular is scaffolded:
 - [x] Branching convention recorded in `.ai/Decisions.md`
 - [x] Branching convention recorded in AGENTS.md
 - [x] GitHub issue created
-- [ ] `.github/workflows/ci.yml` created
-- [ ] Initial workflow passes
+- [x] `.github/workflows/ci.yml` created
+- [x] Initial workflow commands pass locally
+- [ ] Initial workflow passes on GitHub
 - [ ] Branch protection configured for `main`
+
+## Verification
+
+- `dotnet build ProductCatalog.sln --configuration Release --no-restore` - passed with 0 warnings and 0 errors
+- `dotnet test ProductCatalog.sln --configuration Release --no-build --verbosity normal` - passed
 
 ## Risks / Blocks
 
-- CI cannot pass until the solution is scaffolded.
+- CI could not pass until the solution was scaffolded; that scaffold now exists on this branch.
 - Angular build checks must wait until the SPA exists.
 
 ## Next Steps
 
-- Implement the initial CI workflow immediately after solution scaffolding.
+- Push this branch and verify the GitHub Actions run.
+- Configure branch protection for `main` after the workflow is visible in GitHub.
