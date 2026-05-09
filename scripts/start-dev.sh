@@ -16,8 +16,15 @@ cleanup() {
 }
 trap cleanup SIGINT SIGTERM
 
+# 1. Start API first
 dotnet run --project backend/ProductCatalog.Api/ProductCatalog.Api.csproj &
-sleep 3
+
+# 2. Wait for API health before starting BFF and UI
+echo "Waiting for API to be ready..."
+until curl -sf http://localhost:5000/health >/dev/null 2>&1; do sleep 1; done
+echo "✓ API ready."
+
+# 3. Start BFF then UI
 dotnet run --project frontend/ProductCatalog.Bff/ProductCatalog.Bff.csproj &
 sleep 2
 cd frontend/product-catalog-ui && ng serve --proxy-config proxy.conf.json &
