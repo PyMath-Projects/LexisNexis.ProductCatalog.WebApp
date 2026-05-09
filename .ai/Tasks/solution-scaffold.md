@@ -2,6 +2,7 @@
 
 **Branch:** `feature/solution-scaffold`
 **Ticket:** #1 - Scaffold solution structure and project references
+**Pull Request:** #12 - Scaffold solution structure and CI
 **Base branch:** `main`
 
 ## Scope
@@ -39,7 +40,8 @@ and package references required by the project brief.
 - [x] Build verified
 - [x] Tests verified
 - [x] CI workflow added
-- [ ] Branch pushed
+- [x] Branch pushed
+- [x] Pull request opened
 
 ## Verification
 
@@ -56,5 +58,5 @@ and package references required by the project brief.
 
 - Commit the verified scaffold.
 - Add the initial CI workflow.
-- Push the feature branch.
-- Open/update PR workflow once GitHub Actions exists.
+- Wait for PR checks.
+- Merge after review and passing CI.

@@ -2,6 +2,7 @@
 
 **Branch:** `feature/solution-scaffold`
 **Ticket:** #11 - Add GitHub Actions CI and branch workflow guidance
+**Pull Request:** #12 - Scaffold solution structure and CI
 **Base branch:** `main`
 
 ## Scope
@@ -44,7 +45,7 @@ After Angular is scaffolded:
 - [x] `.github/workflows/ci.yml` created
 - [x] Main-branch versioned release step added
 - [x] Initial workflow commands pass locally
-- [ ] Initial workflow passes on GitHub
+- [ ] Initial workflow passes on GitHub PR
 - [ ] First main-branch release is created after merge
 - [ ] Branch protection configured for `main`
 
