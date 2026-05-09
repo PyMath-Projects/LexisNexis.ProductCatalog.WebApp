@@ -43,6 +43,8 @@ events, and product repository interface using test-first development.
 - `dotnet test tests/ProductCatalog.Domain.Tests/ProductCatalog.Domain.Tests.csproj --no-restore` - passed after implementation, 22 domain tests.
 - `dotnet build ProductCatalog.sln --no-restore` - passed with 0 warnings and 0 errors.
 - `dotnet test ProductCatalog.sln --no-build --verbosity normal` - passed.
+- `dotnet build ProductCatalog.sln --configuration Release --no-restore` - passed with 0 warnings and 0 errors.
+- `dotnet test ProductCatalog.sln --configuration Release --no-build --verbosity normal` - passed.
 - Confirmed `backend/ProductCatalog.Domain/ProductCatalog.Domain.csproj` has zero package references.
 
 ## Risks / Blocks
