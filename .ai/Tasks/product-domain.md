@@ -2,6 +2,7 @@
 
 **Branch:** `feature/product-domain`
 **Ticket:** #3 - Implement Product aggregate and value objects with tests
+**Pull Request:** #14 - Implement Product aggregate and value objects
 **Base branch:** `main`
 
 ## Scope
@@ -33,7 +34,7 @@ events, and product repository interface using test-first development.
 - [x] Failing tests written
 - [x] Product domain model implemented
 - [x] Local tests pass
-- [ ] Pull request opened
+- [x] Pull request opened
 - [ ] PR checks pass
 - [ ] Merged to `main`
 
