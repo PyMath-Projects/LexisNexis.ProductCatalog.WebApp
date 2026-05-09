@@ -13,7 +13,7 @@ branch while normal implementation happens on focused `feature/*` and `fix/*` br
 
 - `.github/workflows/ci.yml` - restore, build, and test checks
 - `AGENTS.md` - branch and CI conventions
-- `AI/Decisions.md` - coordination decision for CI-gated integration
+- `.ai/Decisions.md` - coordination decision for CI-gated integration
 - GitHub repository settings - branch protection for `main` after CI exists
 
 ## Initial CI Shape
@@ -36,7 +36,7 @@ After Angular is scaffolded:
 
 ## Progress
 
-- [x] Branching convention recorded in AI decisions
+- [x] Branching convention recorded in `.ai/Decisions.md`
 - [x] Branching convention recorded in AGENTS.md
 - [x] GitHub issue created
 - [ ] `.github/workflows/ci.yml` created
@@ -50,5 +50,4 @@ After Angular is scaffolded:
 
 ## Next Steps
 
-- Create the GitHub issue and link this task file to it.
 - Implement the initial CI workflow immediately after solution scaffolding.

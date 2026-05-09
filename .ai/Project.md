@@ -51,6 +51,6 @@ into hierarchical categories, tracking stock levels, and searching the catalog.
 - Product brief: `docs/ProjectBrief.md`
 - Agent instructions: `AGENTS.md`
 - Claude-specific guidance: `CLAUDE.md`
-- Current active task context: `AI/Tasks/`
+- Current active task context: `.ai/Tasks/`
 - Repo issues: `PyMath-Projects/LexisNexis.ProductCatalog.WebApp`
 - GitHub Project: `PyMath-Projects` project `12`

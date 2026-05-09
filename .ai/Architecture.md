@@ -14,7 +14,7 @@ ProductCatalog/
   tests/
     ProductCatalog.Domain.Tests/
     ProductCatalog.Application.Tests/
-  AI/
+  .ai/
     Project.md
     Architecture.md
     Decisions.md
@@ -104,7 +104,7 @@ Read path:
 4. DTO is returned without loading aggregate objects.
 
 ## AI Context
-- `AI/Project.md` describes project purpose and map.
-- `AI/Architecture.md` describes current/planned architecture.
-- `AI/Decisions.md` is the single living decisions file.
-- `AI/Tasks/` contains active task handoff files and must be updated while work is in progress.
+- `.ai/Project.md` describes project purpose and map.
+- `.ai/Architecture.md` describes current/planned architecture.
+- `.ai/Decisions.md` is the single living decisions file.
+- `.ai/Tasks/` contains active task handoff files and must be updated while work is in progress.

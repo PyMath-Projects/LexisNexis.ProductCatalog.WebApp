@@ -2,7 +2,7 @@
 
 ## Execution Order
 1. Read `docs/ProjectBrief.md` fully before starting any task.
-2. Maintain the `AI/` directory (`Project.md`, `Architecture.md`, `Decisions.md`, `Tasks/`) as the active agent context.
+2. Maintain the `.ai/` directory (`Project.md`, `Architecture.md`, `Decisions.md`, `Tasks/`) as the active agent context.
 3. Scaffold the solution: sln, projects, project references, NuGet packages.
 4. Implement Domain + Domain.Tests (TDD - tests first).
 5. Implement Application (VSA slices) + Application.Tests.
@@ -35,8 +35,8 @@ write the failing test before writing the implementation.
 - Events in Events/ subfolder of their aggregate
 - Slice folders use PascalCase matching the command/query name
 - Domain event handlers go in Application/Handlers/ - never inside a feature slice
-- Decisions belong in the single `AI/Decisions.md` file - do not create per-ADR files
-- Active task handoff files belong in `AI/Tasks/`
+- Decisions belong in the single `.ai/Decisions.md` file - do not create per-ADR files
+- Active task handoff files belong in `.ai/Tasks/`
 
 ## Git Commit Convention
 feat(domain): add Product aggregate

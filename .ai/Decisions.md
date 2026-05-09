@@ -100,7 +100,7 @@ If another bounded context must consume events, domain event handlers can write 
 - Source of truth for planned work: `docs/ProjectBrief.md`, GitHub issues, and GitHub Project tracking.
 - Branch model: use `feature/*` branches for planned feature work and `fix/*` branches for corrections; `main` is the integration branch.
 - GitHub Actions: add `.github/workflows/ci.yml` early in M0. Initial workflow should run on pushes and pull requests to `main`, install .NET 9, restore, build with warnings as errors, and run tests. Extend the workflow with Node/Angular install and build steps when `frontend/product-catalog-ui` is scaffolded.
-- Task-file handoff: active files in `AI/Tasks/` are live task status records and must be updated as scope, blockers, verification, commits, and next steps change.
+- Task-file handoff: active files in `.ai/Tasks/` are live task status records and must be updated as scope, blockers, verification, commits, and next steps change.
 - PR/readiness gate: before marking a task complete, all acceptance criteria and verification commands for that task should be recorded.
 - Repo issues: `PyMath-Projects/LexisNexis.ProductCatalog.WebApp`.
 
@@ -108,4 +108,4 @@ If another bounded context must consume events, domain event handlers can write 
 - If a concept exists in code, treat it as implemented.
 - If a concept appears only in the brief or GitHub planning, treat it as planned until code exists.
 - Do not rewrite architecture docs to describe future slices as already implemented.
-- Keep `AI/Decisions.md` as the single decisions file; do not create per-ADR markdown files.
+- Keep `.ai/Decisions.md` as the single decisions file; do not create per-ADR markdown files.
