@@ -24,9 +24,13 @@ echo "Waiting for API to be ready..."
 until curl -sf http://localhost:5000/health >/dev/null 2>&1; do sleep 1; done
 echo "✓ API ready."
 
-# 3. Start BFF then UI
+# 3. Start BFF and wait for it to be ready
 dotnet run --project frontend/ProductCatalog.Bff/ProductCatalog.Bff.csproj &
-sleep 2
+echo "Waiting for BFF to be ready..."
+until curl -sf http://localhost:5100/health >/dev/null 2>&1; do sleep 1; done
+echo "✓ BFF ready."
+
+# 4. Start Angular dev server
 cd frontend/product-catalog-ui && ng serve --proxy-config proxy.conf.json &
 
 wait

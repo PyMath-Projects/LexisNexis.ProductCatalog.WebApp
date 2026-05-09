@@ -21,7 +21,9 @@ dev:
 	echo "✓ API ready." && \
 	dotnet run --project frontend/ProductCatalog.Bff/ProductCatalog.Bff.csproj \
 		--launch-profile Development & \
-	sleep 2 && \
+	echo "Waiting for BFF to be ready..." && \
+	until curl -sf http://localhost:5100/health >/dev/null 2>&1; do sleep 1; done && \
+	echo "✓ BFF ready." && \
 	cd frontend/product-catalog-ui && ng serve --proxy-config proxy.conf.json
 
 dev-backend:
