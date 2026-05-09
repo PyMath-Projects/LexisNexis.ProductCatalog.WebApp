@@ -54,3 +54,4 @@ fix: correct stock quantity adjustment invariant
 - Keep commits incremental and testable.
 - Open PRs back to `main`; do not treat long-running local changes as complete until CI passes.
 - Required GitHub Actions workflow: restore, build, and test .NET solution; add Angular install/build once the SPA is scaffolded.
+- Successful pushes to `main` must create a versioned GitHub Release. Current version pattern: `v0.1.<github-run-number>`.
