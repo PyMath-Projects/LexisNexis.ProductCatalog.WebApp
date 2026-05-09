@@ -2,7 +2,7 @@
 
 **Branch:** `feature/application-layer`
 **Ticket:** #4 - Implement Application layer with VSA slices and handler tests
-**Pull Request:** (pending)
+**Pull Request:** #15 - feat(application): implement VSA Application layer with handler tests
 **Base branch:** `main`
 
 ## Scope
@@ -40,13 +40,13 @@ CategoryCreated event, and ProductDeleted event (needed by DeleteProduct slice).
 
 - [x] Feature branch created
 - [x] Task file created
-- [ ] Missing domain pieces added (Category, ProductDeleted)
-- [ ] Failing tests written
-- [ ] Application Common implemented
-- [ ] Application Features implemented
-- [ ] Application Handlers implemented
-- [ ] Local tests pass
-- [ ] Pull request opened
+- [x] Missing domain pieces added (Category, ProductDeleted)
+- [x] Failing tests written
+- [x] Application Common implemented
+- [x] Application Features implemented
+- [x] Application Handlers implemented
+- [x] Local tests pass (56 tests: 22 domain + 34 application)
+- [x] Pull request opened (#15)
 - [ ] PR checks pass
 - [ ] Merged to `main`
 
