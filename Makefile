@@ -10,6 +10,8 @@ install:
 
 # ── Run all three services in order (API must be ready before BFF/UI) ────────
 dev:
+	@echo "→ Clearing ports 5000, 5100, 4200..."
+	@fuser -k 5000/tcp 5100/tcp 4200/tcp 2>/dev/null || true
 	@echo "→ Starting all services. Logs will appear below."
 	@echo "   API   → http://localhost:5000"
 	@echo "   BFF   → http://localhost:5100"

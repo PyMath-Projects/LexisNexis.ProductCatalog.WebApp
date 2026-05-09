@@ -16,6 +16,9 @@ cleanup() {
 }
 trap cleanup SIGINT SIGTERM
 
+# Clear any stale processes on our ports before starting
+fuser -k 5000/tcp 5100/tcp 4200/tcp 2>/dev/null || true
+
 # 1. Start API first
 dotnet run --project backend/ProductCatalog.Api/ProductCatalog.Api.csproj &
 
