@@ -25,7 +25,7 @@ events, and product repository interface using test-first development.
 - [ ] Sku, Money, and StockQuantity value object tests pass
 - [ ] Product.CompareTo() sorts by Price then Name
 - [ ] `dotnet test` passes
-- [ ] PR checks pass
+- [x] PR checks pass
 
 ## Progress
 
@@ -47,6 +47,7 @@ events, and product repository interface using test-first development.
 - `dotnet build ProductCatalog.sln --configuration Release --no-restore` - passed with 0 warnings and 0 errors.
 - `dotnet test ProductCatalog.sln --configuration Release --no-build --verbosity normal` - passed.
 - Confirmed `backend/ProductCatalog.Domain/ProductCatalog.Domain.csproj` has zero package references.
+- GitHub PR check `Build and test` passed on PR #14.
 
 ## Risks / Blocks
 
