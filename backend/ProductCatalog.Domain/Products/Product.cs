@@ -132,6 +132,12 @@ public sealed class Product : AggregateRoot<Guid>, IComparable<Product>
         RaiseDomainEvent(new ProductReactivated(Id, UpdatedAt));
     }
 
+    /// <summary>Raises ProductDeleted so the dispatcher can publish the event after the repo removes the record.</summary>
+    public void MarkAsDeleted()
+    {
+        RaiseDomainEvent(new ProductDeleted(Id, DateTimeOffset.UtcNow));
+    }
+
     public int CompareTo(Product? other)
     {
         if (other is null)
