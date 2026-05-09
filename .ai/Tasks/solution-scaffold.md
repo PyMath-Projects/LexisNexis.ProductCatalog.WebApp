@@ -23,11 +23,11 @@ and package references required by the project brief.
 
 ## Acceptance Criteria
 
-- [ ] `dotnet build ProductCatalog.sln` succeeds with zero warnings
-- [ ] Project references match the dependency flow in the brief
-- [ ] Nullable enable + TreatWarningsAsErrors in all backend `.csproj` files
-- [ ] Domain project has zero package references
-- [ ] Changes are committed incrementally
+- [x] `dotnet build ProductCatalog.sln` succeeds with zero warnings
+- [x] Project references match the dependency flow in the brief
+- [x] Nullable enable + TreatWarningsAsErrors in all backend `.csproj` files
+- [x] Domain project has zero package references
+- [x] Changes are committed incrementally
 
 ## Progress
 
@@ -43,6 +43,7 @@ and package references required by the project brief.
 - [x] Branch pushed
 - [x] Pull request opened
 - [x] PR checks passed
+- [x] Merged to `main`
 
 ## Verification
 
@@ -57,7 +58,4 @@ and package references required by the project brief.
 
 ## Next Steps
 
-- Commit the verified scaffold.
-- Add the initial CI workflow.
-- Wait for PR checks.
-- Merge after review and passing CI.
+- Continue with domain tests and implementation on the next feature branch.
