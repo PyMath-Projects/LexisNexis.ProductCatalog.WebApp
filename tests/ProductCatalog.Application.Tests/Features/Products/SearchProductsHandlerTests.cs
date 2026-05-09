@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Moq;
 using ProductCatalog.Application.Common.Interfaces;
+using ProductCatalog.Application.Features.Products.GetProducts;
 using ProductCatalog.Application.Features.Products.SearchProducts;
 using ProductCatalog.Domain.Products;
 
@@ -25,19 +26,21 @@ public sealed class SearchProductsHandlerTests
 
         var result = await CreateHandler().Handle(new SearchProductsQuery("Laptop"), CancellationToken.None);
 
-        result.Should().HaveCount(1);
-        result[0].Name.Should().Be("Laptop Stand");
+        result.Products.Should().HaveCount(1);
+        result.Products[0].Name.Should().Be("Laptop Stand");
+        result.CacheHit.Should().BeFalse();
     }
 
     [Fact]
     public async Task Handle_CachedResult_ReturnsCacheWithoutHittingRepo()
     {
-        var cached = Array.Empty<Application.Features.Products.GetProducts.ProductSummaryDto>().ToList().AsReadOnly() as IReadOnlyList<Application.Features.Products.GetProducts.ProductSummaryDto>;
-        _cache.Setup(c => c.TryGet<IReadOnlyList<Application.Features.Products.GetProducts.ProductSummaryDto>>(It.IsAny<string>(), out cached)).Returns(true);
+        var cached = Array.Empty<ProductSummaryDto>().ToList().AsReadOnly() as IReadOnlyList<ProductSummaryDto>;
+        _cache.Setup(c => c.TryGet<IReadOnlyList<ProductSummaryDto>>(It.IsAny<string>(), out cached)).Returns(true);
 
         var result = await CreateHandler().Handle(new SearchProductsQuery("anything"), CancellationToken.None);
 
         _productRepo.Verify(r => r.GetAllAsync(It.IsAny<CancellationToken>()), Times.Never);
+        result.CacheHit.Should().BeTrue();
     }
 
     [Fact]
@@ -49,6 +52,7 @@ public sealed class SearchProductsHandlerTests
 
         var result = await CreateHandler().Handle(new SearchProductsQuery("   "), CancellationToken.None);
 
-        result.Should().HaveCount(2);
+        result.Products.Should().HaveCount(2);
+        result.CacheHit.Should().BeFalse();
     }
 }

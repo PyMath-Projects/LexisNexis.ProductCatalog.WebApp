@@ -43,6 +43,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   loading = false;
   errorMessage = '';
+  cacheStatus: 'HIT' | 'MISS' | null = null;
 
   ngOnInit(): void {
     this.categoryService.getCategories()
@@ -63,14 +64,27 @@ export class ProductListComponent implements OnInit, OnDestroy {
         switchMap(({ search, categoryId }) => {
           this.loading = true;
           this.errorMessage = '';
-          return this.productService
-            .getProducts(search || undefined, categoryId || undefined)
-            .pipe(
+          this.cacheStatus = null;
+
+          if (search) {
+            return this.productService.search(search).pipe(
+              map((result) => {
+                this.cacheStatus = result.cacheHit ? 'HIT' : 'MISS';
+                return result.products;
+              }),
               catchError(() => {
                 this.errorMessage = 'Failed to load products.';
                 return of([]);
               })
             );
+          }
+
+          return this.productService.getProducts(categoryId || undefined).pipe(
+            catchError(() => {
+              this.errorMessage = 'Failed to load products.';
+              return of([]);
+            })
+          );
         })
       )
       .subscribe((products) => {

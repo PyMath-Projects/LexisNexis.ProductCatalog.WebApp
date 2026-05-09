@@ -26,6 +26,21 @@
     </select>
   </div>
 
+  @if (cacheStatus) {
+    <div class="flex items-center gap-2 mb-4">
+      <span class="text-xs font-medium text-gray-500">Search cache:</span>
+      @if (cacheStatus === 'HIT') {
+        <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+          ✓ HIT — served from cache
+        </span>
+      } @else {
+        <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
+          ↻ MISS — fetched and cached
+        </span>
+      }
+    </div>
+  }
+
   @if (errorMessage) {
     <div class="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded mb-4 text-sm">
       {{ errorMessage }}

@@ -6,17 +6,17 @@ using ProductCatalog.Domain.Products;
 namespace ProductCatalog.Application.Features.Products.SearchProducts;
 
 public sealed class SearchProductsHandler(IProductRepository productRepo, ISearchCache cache)
-    : IRequestHandler<SearchProductsQuery, IReadOnlyList<ProductSummaryDto>>
+    : IRequestHandler<SearchProductsQuery, SearchProductsResult>
 {
     private static readonly ProductSearchEngine _engine = new();
 
     /// <summary>Returns products matching the query using cache-then-search. Cache key is prefixed with "products:".</summary>
-    public async Task<IReadOnlyList<ProductSummaryDto>> Handle(SearchProductsQuery query, CancellationToken ct)
+    public async Task<SearchProductsResult> Handle(SearchProductsQuery query, CancellationToken ct)
     {
         var cacheKey = $"products:{query.Query.Trim().ToUpperInvariant()}";
 
         if (cache.TryGet<IReadOnlyList<ProductSummaryDto>>(cacheKey, out var cached) && cached is not null)
-            return cached;
+            return new SearchProductsResult(cached, CacheHit: true);
 
         var all = (await productRepo.GetAllAsync(ct)).ToList();
 
@@ -36,6 +36,6 @@ public sealed class SearchProductsHandler(IProductRepository productRepo, ISearc
             .AsReadOnly();
 
         cache.Set(cacheKey, results);
-        return results;
+        return new SearchProductsResult(results, CacheHit: false);
     }
 }

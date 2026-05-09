@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import {
   Product,
   ProductSummary,
@@ -8,16 +8,34 @@ import {
   UpdateProductRequest,
 } from '../models/product.model';
 
+export interface SearchResult {
+  products: ProductSummary[];
+  cacheHit: boolean;
+}
+
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   private readonly http = inject(HttpClient);
   private readonly base = '/api/products';
 
-  getProducts(search?: string, categoryId?: string): Observable<ProductSummary[]> {
+  getProducts(categoryId?: string): Observable<ProductSummary[]> {
     const params: Record<string, string> = {};
-    if (search) params['search'] = search;
     if (categoryId) params['categoryId'] = categoryId;
     return this.http.get<ProductSummary[]>(this.base, { params });
+  }
+
+  search(query: string): Observable<SearchResult> {
+    return this.http
+      .get<ProductSummary[]>(this.base, {
+        params: { search: query },
+        observe: 'response',
+      })
+      .pipe(
+        map((response) => ({
+          products: response.body ?? [],
+          cacheHit: response.headers.get('X-Cache') === 'HIT',
+        }))
+      );
   }
 
   getById(id: string): Observable<Product> {
