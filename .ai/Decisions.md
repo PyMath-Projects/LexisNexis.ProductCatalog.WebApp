@@ -25,6 +25,7 @@
 - **Incremental commits are required**: each stage should be committed after verification so the app remains testable and reviewable.
 - **Main is the integration branch**: feature and fix work should happen on focused branches and merge back to `main` only after review/verification.
 - **GitHub Actions gates integration**: CI should restore, build, and test the .NET solution; once Angular exists, CI should also install and build the SPA.
+- **Main branch creates versioned releases**: successful pushes to `main` create a Git tag and GitHub Release using `v0.1.<github-run-number>` until a richer version promotion process is needed.
 
 ## Accepted Architecture Decisions
 
@@ -99,7 +100,7 @@ If another bounded context must consume events, domain event handlers can write 
 - Source of truth for what is implemented: the code in this repository.
 - Source of truth for planned work: `docs/ProjectBrief.md`, GitHub issues, and GitHub Project tracking.
 - Branch model: use `feature/*` branches for planned feature work and `fix/*` branches for corrections; `main` is the integration branch.
-- GitHub Actions: add `.github/workflows/ci.yml` early in M0. Initial workflow should run on pushes and pull requests to `main`, install .NET 9, restore, build with warnings as errors, and run tests. Extend the workflow with Node/Angular install and build steps when `frontend/product-catalog-ui` is scaffolded.
+- GitHub Actions: add `.github/workflows/ci.yml` early in M0. Initial workflow should run on pushes and pull requests to `main`, install .NET 9, restore, build with warnings as errors, and run tests. Pull requests validate only; successful pushes to `main` tag the commit and create a GitHub Release. Extend the workflow with Node/Angular install and build steps when `frontend/product-catalog-ui` is scaffolded.
 - Task-file handoff: active files in `.ai/Tasks/` are live task status records and must be updated as scope, blockers, verification, commits, and next steps change.
 - PR/readiness gate: before marking a task complete, all acceptance criteria and verification commands for that task should be recorded.
 - Repo issues: `PyMath-Projects/LexisNexis.ProductCatalog.WebApp`.
