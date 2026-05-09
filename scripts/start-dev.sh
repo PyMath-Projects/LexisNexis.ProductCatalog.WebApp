@@ -16,10 +16,24 @@ cleanup() {
 }
 trap cleanup SIGINT SIGTERM
 
+# Clear any stale processes on our ports before starting
+fuser -k 5000/tcp 5100/tcp 4200/tcp 2>/dev/null || true
+
+# 1. Start API first
 dotnet run --project backend/ProductCatalog.Api/ProductCatalog.Api.csproj &
-sleep 3
+
+# 2. Wait for API health before starting BFF and UI
+echo "Waiting for API to be ready..."
+until curl -sf http://localhost:5000/health >/dev/null 2>&1; do sleep 1; done
+echo "✓ API ready."
+
+# 3. Start BFF and wait for it to be ready
 dotnet run --project frontend/ProductCatalog.Bff/ProductCatalog.Bff.csproj &
-sleep 2
+echo "Waiting for BFF to be ready..."
+until curl -sf http://localhost:5100/health >/dev/null 2>&1; do sleep 1; done
+echo "✓ BFF ready."
+
+# 4. Start Angular dev server
 cd frontend/product-catalog-ui && ng serve --proxy-config proxy.conf.json &
 
 wait
